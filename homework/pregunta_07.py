@@ -25,3 +25,31 @@ def pregunta_07():
      (9, ['A', 'B', 'E', 'A', 'A', 'C'])]
 
     """
+    ruta_archivo = "files/input/data.csv"
+    
+    agrupacion = {}
+    
+    # Abrimos el archivo
+    with open(ruta_archivo, 'r') as archivo:
+        for linea in archivo:
+            columnas = linea.strip().split('\t')
+            
+            if len(columnas) > 1 and columnas[0] != '':
+                letra = columnas[0]
+                # Convertimos el valor numérico a entero para que se ordene correctamente luego
+                numero = int(columnas[1])
+                
+                # Si el número aún no es una clave en el diccionario, inicializamos una lista vacía
+                if numero not in agrupacion:
+                    agrupacion[numero] = []
+                    
+                # Añadimos la letra a la lista correspondiente a ese número
+                agrupacion[numero].append(letra)
+                
+    # La función items() nos da tuplas (numero, [letras]) y sorted() las ordena de menor a mayor por la clave (el número)
+    resultado = sorted(agrupacion.items())
+    
+    return resultado
+
+# Para probarlo:
+# print(pregunta_07())
